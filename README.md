@@ -1,6 +1,6 @@
 # announce-code-review
 
-**announce-code-review** is a GitHub Action that automatically posts your pull requests for review at the CodeKeepers Discord Server via our proprietary API. This action performs a series of checks to ensure authenticity before triggering a review request.
+**announce-code-review** is a GitHub Action that automatically posts your pull requests for review at the [CodeKeepers Discord Server](https://discord.gg/uhvQpVmxeK) via our proprietary API. This action performs a series of checks to ensure authenticity before triggering a review request.
 
 ## Features
 
