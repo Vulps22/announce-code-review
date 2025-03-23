@@ -1,0 +1,42 @@
+name: 'CodeKeepers Review Request Action'
+description: 'Checks that a repository is public, verifies the CodeKeepers badge (via git blame), and sends a review request to an API endpoint.'
+author: 'CodeKeepers'
+inputs:
+  api_token:
+    description: 'API token for authenticating with the CodeKeepers endpoint'
+    required: true
+  pr_url:
+    description: 'The pull request URL'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Check repository privacy
+      run: |
+        if [ "${{ github.event.repository.private }}" = "true" ]; then
+          echo "Repository is private. Exiting."
+          exit 1
+        fi
+    - name: Check README badge
+      run: |
+        if ! grep -q 'Join CodeKeepers' README.md; then
+          echo "Badge not found in README.md."
+          exit 1
+        fi
+    - name: Verify badge commit author
+      run: |
+        line=$(grep -n 'Join CodeKeepers' README.md | cut -d: -f1 | head -n 1)
+        blame=$(git blame -L ${line},${line} README.md)
+        echo "$blame"
+        if ! echo "$blame" | grep -q "Vulps22"; then
+          echo "Badge was not committed by Vulps22."
+          exit 1
+        fi
+    - name: Send review request
+      run: |
+        curl -X POST https://vulps.co.uk/codekeepers/api/review-request \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ inputs.api_token }}" \
+          -d "{\"url\": \"${{ inputs.pr_url }}\", \"username\": \"Vulps22\"}"
