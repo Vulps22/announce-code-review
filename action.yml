@@ -13,6 +13,12 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    - name: Check PR description for #discord
+      run: |
+        if ! echo "${{ github.event.pull_request.body }}" | grep -q "#discord"; then
+          echo "Pull request description does not contain #discord"
+          exit 1
+        fi
     - name: Check repository privacy
       run: |
         if [ "${{ github.event.repository.private }}" = "true" ]; then
@@ -39,4 +45,4 @@ runs:
         curl -X POST https://vulps.co.uk/codekeepers/api/review-request \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer ${{ inputs.api_token }}" \
-          -d "{\"url\": \"${{ inputs.pr_url }}\", \"username\": \"Vulps22\"}"
+          -d "{\"url\": \"${{ github.event.pull_request.html_url }}\", \"username\": \"${{ github.repository_owner }}\"}"
