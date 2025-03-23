@@ -1,6 +1,9 @@
 name: 'CodeKeepers Review Request Action'
 description: 'Automatically post your Pull Requests for review at the CodeKeepers Discord Server'
 author: 'CodeKeepers'
+branding:
+  icon: 'check'
+  color: 'green'
 inputs:
   api_token:
     description: 'API token for authenticating with the CodeKeepers endpoint'
