@@ -22,7 +22,7 @@ runs:
     - name: Check README badge
       run: |
         if ! grep -q 'Join CodeKeepers' README.md; then
-          echo "Badge not found in README.md."
+          echo "Badge not found in README.md. DM vulps on discord to ask for verification"
           exit 1
         fi
     - name: Verify badge commit author
@@ -31,7 +31,7 @@ runs:
         blame=$(git blame -L ${line},${line} README.md)
         echo "$blame"
         if ! echo "$blame" | grep -q "Vulps22"; then
-          echo "Badge was not committed by Vulps22."
+          echo "Badge was not committed by Vulps22. The badge must be committed by Vulps22 to be authentic"
           exit 1
         fi
     - name: Send review request
