@@ -16,13 +16,6 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Check PR description for #discord
-      run: |
-        if ! echo "${{ github.event.pull_request.body }}" | grep -q "#discord"; then
-          echo "Pull request description does not contain #discord"
-          exit 1
-        fi
-      shell: bash
     - name: Check repository privacy
       run: |
         if [ "${{ github.event.repository.private }}" = "true" ]; then
