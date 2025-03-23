@@ -1,5 +1,5 @@
 name: 'CodeKeepers Review Request Action'
-description: 'Checks that a repository is public, verifies the CodeKeepers badge (via git blame), and sends a review request to an API endpoint.'
+description: 'Automatically post your Pull Requests for review at the CodeKeepers Discord Server'
 author: 'CodeKeepers'
 inputs:
   api_token:
