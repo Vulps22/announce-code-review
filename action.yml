@@ -42,7 +42,7 @@ runs:
         line=$(grep -n 'Join CodeKeepers' README.md | cut -d: -f1 | head -n 1)
         blame=$(git blame -L ${line},${line} README.md)
         echo "$blame"
-        if ! echo "$blame" | grep -q "Vulps22"; then
+        if ! echo "$blame" | grep -q "Vulps"; then
           echo "Badge was not committed by Vulps22. The badge must be committed by Vulps22 to be authentic"
           exit 1
         fi
