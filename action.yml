@@ -22,18 +22,21 @@ runs:
           echo "Pull request description does not contain #discord"
           exit 1
         fi
+      shell: bash
     - name: Check repository privacy
       run: |
         if [ "${{ github.event.repository.private }}" = "true" ]; then
           echo "Repository is private. Exiting."
           exit 1
         fi
+      shell: bash
     - name: Check README badge
       run: |
         if ! grep -q 'Join CodeKeepers' README.md; then
           echo "Badge not found in README.md. DM vulps on discord to ask for verification"
           exit 1
         fi
+      shell: bash
     - name: Verify badge commit author
       run: |
         line=$(grep -n 'Join CodeKeepers' README.md | cut -d: -f1 | head -n 1)
@@ -43,9 +46,11 @@ runs:
           echo "Badge was not committed by Vulps22. The badge must be committed by Vulps22 to be authentic"
           exit 1
         fi
+      shell: bash
     - name: Send review request
       run: |
         curl -X POST https://vulps.co.uk/codekeepers/api/review-request \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer ${{ inputs.api_token }}" \
           -d "{\"url\": \"${{ github.event.pull_request.html_url }}\", \"username\": \"${{ github.repository_owner }}\"}"
+      shell: bash
