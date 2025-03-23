@@ -8,9 +8,6 @@ inputs:
   api_token:
     description: 'API token for authenticating with the CodeKeepers endpoint'
     required: true
-  pr_url:
-    description: 'The pull request URL'
-    required: true
 runs:
   using: "composite"
   steps:
