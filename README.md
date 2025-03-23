@@ -34,13 +34,13 @@ jobs:
         uses: Vulps22/announce-code-review@v1.0.0
         with:
           api_token: ${{ secrets.API_TOKEN }}
-          pr_url: ${{ github.event.pull_request.html_url }}
 ```
 
 > **Note:**  
 > - Make sure you add your API token in your repository secrets as `API_TOKEN`.
 
 - Once your project meets all the requirements for approval, Vulps22 (Discord: vulps23) will sign your project with this image, Signifying your project is ready for review:
+  
   [<img src="https://vulps.co.uk/raw/img/codekeepers-text.png" alt="Join CodeKeepers" height="75"/>](https://discord.gg/uhvQpVmxeK)
 
 ## Inputs
@@ -48,7 +48,6 @@ jobs:
 | Input       | Description                                                        | Required |
 |-------------|--------------------------------------------------------------------|----------|
 | `api_token` | API token for authenticating with the CodeKeepers endpoint         | Yes      |
-| `pr_url`    | The pull request URL (e.g., `${{ github.event.pull_request.html_url }}`) | Yes      |
 
 ## What the Action Does
 
